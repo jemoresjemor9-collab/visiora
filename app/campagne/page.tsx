@@ -113,8 +113,8 @@ export default function CampaignRequestPage() {
             <input type="text" readOnly value={calculatedAmount > 0 ? `${calculatedAmount.toLocaleString("fr-FR")} FCFA` : "Saisissez un nombre d’abonnés valide"} aria-live="polite" />
           </label>
           {error && <p className="auth-error">{error}</p>}
-          {done && <p className="auth-success">{done}</p>}
-          <button className="button button-primary auth-submit" disabled={busy}>{busy?"Enregistrement…":"Enregistrer ma demande"} <span>↗</span></button>
+          {done && <div className="auth-success"><p>{done}</p><Link href="/espace">Retrouver ma campagne dans mon espace →</Link></div>}
+          <button className="button button-primary auth-submit" disabled={busy}>{busy?"Enregistrement…":"Créer ma demande de campagne"} <span>↗</span></button>
           <p className="auth-terms">Visiora favorise la découverte de comptes et les abonnements volontaires de personnes réelles. Aucun faux abonné, bot ou résultat garanti.</p>
         </form>
       </section>
