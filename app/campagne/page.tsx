@@ -15,6 +15,7 @@ export default function CampaignRequestPage() {
   const [title, setTitle] = useState("");
   const [objective, setObjective] = useState<"reach"|"views"|"engagement">("reach");
   const [budget, setBudget] = useState("5000");
+  const [target, setTarget] = useState("1000");
   const [brief, setBrief] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -37,6 +38,7 @@ export default function CampaignRequestPage() {
           platform,
           platform_url: url.trim(),
           objective,
+          target_visits: Number(target),
           title: title.trim(),
           brief: brief.trim() || null,
           budget_amount: amount,
@@ -88,6 +90,7 @@ export default function CampaignRequestPage() {
               <option value="engagement">Encourager les interactions volontaires</option>
             </select>
           </label>
+          <label>Objectif indicatif de portée ou de vues<input type="number" min="0" step="100" value={target} onChange={e=>setTarget(e.target.value)} /><small className="field-hint">C’est une cible de campagne, pas une promesse d’abonnés ou de résultats garantis.</small></label>
           <label>Budget prévu (XOF)<input type="number" min="500" step="500" required value={budget} onChange={e=>setBudget(e.target.value)} /></label>
           <label>Précisions (facultatif)<textarea rows={3} maxLength={1500} value={brief} onChange={e=>setBrief(e.target.value)} placeholder="Décrivez votre public, votre contenu ou vos attentes…" /></label>
           {error && <p className="auth-error">{error}</p>}
