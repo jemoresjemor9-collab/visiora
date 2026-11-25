@@ -159,3 +159,49 @@ h1 span,.platform-heading h2 span,.how-intro h2 span,.closing-content h2 span{co
 .workspace-panel p{max-width:480px;color:#9aabc2;font-size:12px;line-height:1.8;margin:0}
 .workspace-badge{font-size:9px;color:#81dfbb;background:#164537;padding:7px 10px;border-radius:30px;white-space:nowrap}
 @media(max-width:600px){.auth-page{padding-inline:18px}.auth-header{height:72px}.auth-card{padding:28px 21px;margin:50px auto 35px}.auth-card h1{font-size:29px}.workspace-page{padding:0 19px 45px}.workspace-main{margin-top:60px}.workspace-main h1{font-size:34px}.workspace-panel{padding:22px;display:block}.workspace-badge{display:inline-block;margin-top:20px}}
+
+/* Visiora campaign, support and administration */
+.flow-page{min-height:100vh;background:radial-gradient(ellipse at 50% 0,#12315a 0,#080d1b 48%);padding:0 24px 60px}
+.flow-header{width:min(1160px,100%);height:82px;margin:auto;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.flow-wrap{width:min(760px,100%);margin:65px auto 0}
+.flow-wrap>h1{font-size:clamp(32px,5vw,45px);letter-spacing:-2px;margin:14px 0 10px}
+.flow-lead{max-width:600px;color:#9cacc2;font-size:13px;line-height:1.75;margin-bottom:26px}
+.flow-card{display:grid;gap:17px;padding:27px;border:1px solid #2b3b55;background:linear-gradient(145deg,#121f34,#0d1627);border-radius:15px}
+.flow-card label{display:grid;gap:8px;color:#c6d4e7;font-size:11px;font-weight:600}
+.flow-card input,.flow-card select,.flow-card textarea{width:100%;border:1px solid #34445d;border-radius:8px;background:#0a1424;color:#fff;padding:13px 12px;font:400 12px var(--font);outline:none}
+.flow-card input:focus,.flow-card select:focus,.flow-card textarea:focus{border-color:#4c9fff;box-shadow:0 0 0 3px #2587ff20}
+.flow-card textarea{resize:vertical}
+.platform-choice{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.platform-choice button{border:1px solid #34445d;background:#0a1424;color:#aebed4;border-radius:8px;padding:12px;font:600 11px var(--font);cursor:pointer}
+.platform-choice button.selected{border-color:#4c9fff;background:#14345b;color:#fff}
+.flow-card .auth-submit{margin-top:2px}
+.chat-layout{display:grid;grid-template-columns:220px 1fr;gap:14px;min-height:480px}
+.chat-sidebar,.chat-panel{border:1px solid #2b3b55;background:#101a2b;border-radius:13px;overflow:hidden}
+.chat-sidebar{padding:12px;display:flex;flex-direction:column;gap:9px}
+.chat-sidebar>.button{width:100%;font-size:10px;padding:11px}
+.thread-link{border:1px solid transparent;background:transparent;text-align:left;padding:12px;border-radius:8px;color:#dce8f8;cursor:pointer}
+.thread-link.active{background:#172b46;border-color:#31537d}
+.thread-link strong,.thread-link small{display:block}
+.thread-link strong{font-size:10px}.thread-link small{font-size:9px;color:#8da2bf;margin-top:5px}
+.chat-panel{display:flex;flex-direction:column;min-height:480px}
+.chat-top{padding:15px 17px;border-bottom:1px solid #2a3a53;display:flex;justify-content:space-between;gap:12px}
+.chat-top strong{font-size:12px}.chat-top span{font-size:9px;color:#8fa3bf}
+.chat-messages{padding:17px;display:flex;flex-direction:column;gap:12px;flex:1;max-height:420px;overflow:auto}
+.chat-empty,.admin-empty{font-size:11px;color:#91a4bf;line-height:1.7}
+.chat-bubble{align-self:flex-start;max-width:88%;padding:11px 13px;background:#1a2b43;border:1px solid #34465f;border-radius:10px}
+.chat-bubble.mine{align-self:flex-end;background:#123b68;border-color:#2867a4}
+.chat-bubble span,.chat-bubble small{font-size:9px;color:#9db2ce}
+.chat-bubble p{font-size:12px;line-height:1.6;margin:6px 0;color:#f0f5fc;white-space:pre-wrap}
+.chat-compose{display:flex;gap:9px;padding:12px;border-top:1px solid #2a3a53}
+.chat-compose textarea{flex:1;resize:none;border:1px solid #34445d;border-radius:8px;background:#0a1424;color:#fff;padding:11px;font:12px var(--font)}
+.chat-compose .button{padding:10px 13px;font-size:10px}
+.admin-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:26px 0}
+.admin-stats>div{padding:17px;border:1px solid #2c4567;border-radius:11px;background:#11223a}
+.admin-stats strong,.admin-stats span{display:block}.admin-stats strong{font:800 25px var(--display)}.admin-stats span{font-size:10px;color:#9aacc4;margin-top:5px}
+.admin-section{margin-top:22px;border:1px solid #2b3b55;background:#101a2b;border-radius:12px;padding:19px}
+.admin-section h2{font:700 16px var(--display);margin:0 0 12px}
+.admin-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-top:1px solid #26374e;color:#eaf2fd}
+.admin-row:first-of-type{border-top:0}
+.admin-row strong,.admin-row small{display:block}.admin-row strong{font-size:11px}.admin-row small{font-size:9px;color:#8fa3bf;margin-top:5px}
+.admin-row b{font-size:11px}.status-good,.status-pending{font-size:9px;padding:6px 9px;border-radius:20px;white-space:nowrap}.status-good{color:#88e0bb;background:#164536}.status-pending{color:#ffd18a;background:#4c381d}
+@media(max-width:680px){.flow-page{padding-inline:18px}.flow-header{height:72px}.flow-wrap{margin-top:44px}.flow-card{padding:19px}.chat-layout{grid-template-columns:1fr}.chat-sidebar{max-height:180px;overflow:auto}.chat-panel{min-height:430px}.chat-compose{flex-direction:column}.chat-compose .button{width:100%}.admin-stats{grid-template-columns:1fr}.admin-row{align-items:flex-start}}
