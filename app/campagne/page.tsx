@@ -38,19 +38,19 @@ export default function CampaignRequestPage() {
   const supabase = createClient();
   const [platform, setPlatform] = useState<"tiktok"|"youtube"|"facebook">("tiktok");
   const [url, setUrl] = useState("");
-  const [title, setTitle] = useState("");
   const [objective, setObjective] = useState<"followers">("followers");
-  const [budget, setBudget] = useState("5000");
   const [target, setTarget] = useState("1000");
-  const [brief, setBrief] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState("");
+  const requestedSubscribers = Number(target);
+  const calculatedAmount = Number.isInteger(requestedSubscribers) && requestedSubscribers > 0
+    ? Math.ceil((requestedSubscribers * 2500) / 1000)
+    : 0;
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setBusy(true); setError(""); setDone("");
-    const amount = Number(budget);
     if (!isProfileUrl(platform, url.trim())) {
       setError("Saisissez le lien direct du profil du compte, et non celui d’une vidéo ou d’une publication.");
       setBusy(false);
@@ -62,41 +62,20 @@ export default function CampaignRequestPage() {
       setBusy(false);
       return;
     }
-    if (!Number.isFinite(amount) || amount < 500) {
-      setError("Saisissez un budget d’au moins 500 XOF."); setBusy(false); return;
-    }
     try {
       const { data: userData, error: userError } = await supabase.auth.getUser();
       if (userError || !userData.user) { router.push("/connexion"); return; }
-      const { data: campaign, error: campaignError } = await supabase
-        .from("campaigns")
-        .insert({
-          user_id: userData.user.id,
-          platform,
-          platform_url: url.trim(),
-          objective,
-          target_subscribers: subscriberTarget,
-          title: title.trim(),
-          brief: brief.trim() || null,
-          budget_amount: amount,
-          currency: "XOF",
-          status: "pending_payment"
-        })
-        .select("id")
-        .single();
-      if (campaignError) throw campaignError;
-
-      const { error: paymentError } = await supabase.from("payments").insert({
-        user_id: userData.user.id,
-        campaign_id: campaign.id,
-        amount,
-        currency: "XOF",
-        status: "pending"
+      const { data: order, error: orderError } = await supabase.rpc("create_campaign_order", {
+        p_platform: platform,
+        p_platform_url: url.trim(),
+        p_target_subscribers: subscriberTarget
       });
-      if (paymentError) throw paymentError;
+      if (orderError) throw orderError;
 
-      setDone("Votre demande est enregistrée. Elle apparaîtra dans votre espace dès que le paiement sera confirmé. Le moyen de paiement sera activé dès que le prestataire sera configuré.");
-      setUrl(""); setTitle(""); setBrief("");
+      const savedOrder = Array.isArray(order) ? order[0] : order;
+      const confirmedAmount = Number(savedOrder?.amount ?? calculatedAmount);
+      setDone(`Votre demande est enregistrée. Montant à payer : ${confirmedAmount.toLocaleString("fr-FR")} FCFA. Le moyen de paiement sera activé dès que le prestataire sera configuré.`);
+      setUrl(""); setTarget("1000");
     } catch (e) {
       const message = e instanceof Error ? e.message : "Impossible d’enregistrer la demande.";
       setError(message.includes("déjà une campagne Visiora")
@@ -124,13 +103,16 @@ export default function CampaignRequestPage() {
             </div>
           </label>
           <label>Lien du profil du compte<input type="url" required value={url} onChange={e=>setUrl(e.target.value)} placeholder="https://www.tiktok.com/@votrecompte" /><small className="field-hint">Utilisez le lien de votre profil TikTok, de votre chaîne YouTube ou de votre page Facebook. Les liens de vidéos et de publications ne sont pas acceptés.</small></label>
-          <label>Nom de votre campagne abonnés<input required maxLength={100} value={title} onChange={e=>setTitle(e.target.value)} placeholder="Ex. Mise en avant de ma chaîne" /></label>
           <label>Objectif de la campagne
             <input value="Développer des abonnés authentiques" readOnly />
           </label>
-          <label>Nombre indicatif d’abonnés souhaités<input type="number" min="1" step="100" value={target} onChange={e=>setTarget(e.target.value)} /><small className="field-hint">C’est un objectif indicatif, pas une promesse de résultat ni un nombre garanti.</small></label>
-          <label>Budget prévu (XOF)<input type="number" min="500" step="500" required value={budget} onChange={e=>setBudget(e.target.value)} /></label>
-          <label>Précisions (facultatif)<textarea rows={3} maxLength={1500} value={brief} onChange={e=>setBrief(e.target.value)} placeholder="Décrivez votre public, votre contenu ou vos attentes…" /></label>
+          <label>Nombre d’abonnés souhaités
+            <input type="number" min="1" step="1" required value={target} onChange={e=>setTarget(e.target.value)} inputMode="numeric" />
+            <small className="field-hint">Tarif : 2 500 FCFA pour 1 000 abonnés indicatifs. Le montant est calculé automatiquement et toute fraction de franc est arrondie au franc supérieur.</small>
+          </label>
+          <label>Montant à payer
+            <input type="text" readOnly value={calculatedAmount > 0 ? `${calculatedAmount.toLocaleString("fr-FR")} FCFA` : "Saisissez un nombre d’abonnés valide"} aria-live="polite" />
+          </label>
           {error && <p className="auth-error">{error}</p>}
           {done && <p className="auth-success">{done}</p>}
           <button className="button button-primary auth-submit" disabled={busy}>{busy?"Enregistrement…":"Enregistrer ma demande"} <span>↗</span></button>
