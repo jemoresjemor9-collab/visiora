@@ -205,3 +205,5 @@ h1 span,.platform-heading h2 span,.how-intro h2 span,.closing-content h2 span{co
 .admin-row strong,.admin-row small{display:block}.admin-row strong{font-size:11px}.admin-row small{font-size:9px;color:#8fa3bf;margin-top:5px}
 .admin-row b{font-size:11px}.status-good,.status-pending{font-size:9px;padding:6px 9px;border-radius:20px;white-space:nowrap}.status-good{color:#88e0bb;background:#164536}.status-pending{color:#ffd18a;background:#4c381d}
 @media(max-width:680px){.flow-page{padding-inline:18px}.flow-header{height:72px}.flow-wrap{margin-top:44px}.flow-card{padding:19px}.chat-layout{grid-template-columns:1fr}.chat-sidebar{max-height:180px;overflow:auto}.chat-panel{min-height:430px}.chat-compose{flex-direction:column}.chat-compose .button{width:100%}.admin-stats{grid-template-columns:1fr}.admin-row{align-items:flex-start}}
+
+.workspace-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 24px}.workspace-actions .workspace-logout{display:inline-flex;text-decoration:none}
