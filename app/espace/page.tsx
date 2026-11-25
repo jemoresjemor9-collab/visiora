@@ -6,7 +6,8 @@ const statusLabels: Record<string, string> = {
   draft: "Brouillon",
   pending_payment: "Paiement à effectuer",
   pending_review: "Paiement reçu · validation en attente",
-  active: "Campagne en cours",
+  active: "En cours",
+  half_completed: "À moitié terminée",
   paused: "En pause",
   completed: "Terminée",
   cancelled: "Annulée",
@@ -91,7 +92,7 @@ export default async function EspacePage() {
 
         <section className="admin-section">
           <div className="admin-heading">
-            <div><h2>Mes campagnes</h2><p>Retrouvez vos demandes sur TikTok, YouTube et Facebook, leur paiement et leur progression.</p></div>
+            <div><h2>Mes campagnes</h2><p>Retrouvez vos campagnes et leur statut, mis à jour par l’administration.</p></div>
             <span>{totalCampaigns} campagne(s)</span>
           </div>
           {myCampaigns?.length ? myCampaigns.map(c => {
@@ -131,7 +132,7 @@ export default async function EspacePage() {
             </div>
           )}
         </section>
-        <p className="auth-terms">Les abonnements affichés correspondent uniquement aux événements volontaires réellement enregistrés. L’objectif est indicatif et n’est pas une garantie de résultat.</p>
+        <p className="auth-terms">Le statut de chaque campagne est mis à jour par l’administration. Les abonnements restent volontaires et aucun résultat n’est garanti.</p>
       </section>
     </main>
   );
