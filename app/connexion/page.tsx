@@ -56,7 +56,7 @@ export default function ConnexionPage() {
     <main className="auth-page">
       <div className="auth-backdrop" />
       <header className="auth-header">
-        <Link className="brand" href="/"><span className="brand-mark"><svg viewBox="0 0 42 42" fill="none"><path d="M7 31.5 17.8 8h6.4L35 31.5h-7.2L21 17.1l-6.8 14.4H7Z" fill="currentColor"/><path d="m18.1 26.8 3-6.5 3 6.5h-6Z" fill="#42A5FF"/></svg></span><span>visiora<span className="brand-period">.</span></span></Link>
+        <Link className="brand" href="/"><span className="brand-mark"><svg viewBox="0 0 42 42" fill="none"><path d="M8.5 9.5L19.6 31.8C20.2 33 21.8 33 22.4 31.8L33.5 9.5" stroke="currentColor" strokeWidth="6.2" strokeLinecap="round" strokeLinejoin="round"/><path d="M15.8 9.5L21 20" stroke="#8CC8FF" strokeWidth="2.4" strokeLinecap="round"/></svg></span><span>visiora<span className="brand-period">.</span></span></Link>
         <Link className="auth-back-link" href="/">← Retour à l’accueil</Link>
       </header>
       <section className="auth-card">
