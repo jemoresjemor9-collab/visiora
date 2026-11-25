@@ -1,13 +1,13 @@
 const platforms = [
-  { name: "TikTok", mark: "t", className: "tiktok", detail: "Faites découvrir vos vidéos" },
-  { name: "YouTube", mark: "▶", className: "youtube", detail: "Donnez de l’élan à vos contenus" },
+  { name: "TikTok", mark: "t", className: "tiktok", detail: "Gagnez de nouveaux abonnés" },
+  { name: "YouTube", mark: "▶", className: "youtube", detail: "Développez votre communauté" },
   { name: "Facebook", mark: "f", className: "facebook", detail: "Attirez de nouveaux abonnés" },
 ];
 
 const steps = [
-  { number: "01", title: "Choisissez votre objectif", text: "Sélectionnez votre réseau et le contenu que vous souhaitez mettre en avant." },
+  { number: "01", title: "Choisissez votre réseau", text: "Choisissez TikTok, YouTube ou Facebook et le compte dont vous souhaitez développer les abonnés." },
   { number: "02", title: "Lancez votre campagne", text: "Définissez votre budget et soumettez votre campagne en quelques instants." },
-  { number: "03", title: "Suivez votre visibilité", text: "Consultez l’avancement et les résultats depuis votre espace personnel." },
+  { number: "03", title: "Suivez vos abonnés", text: "Consultez le suivi de votre campagne d’acquisition d’abonnés depuis votre espace personnel." },
 ];
 
 function BrandMark({ small = false }: { small?: boolean }) {
@@ -49,7 +49,7 @@ export default function Home() {
       <section className="hero container">
         <div className="hero-copy">
           <div className="eyebrow"><span className="eyebrow-line" /> LA VISIBILITÉ, EN MOUVEMENT</div>
-          <h1>Votre contenu mérite <span>le devant de la scène.</span></h1>
+          <h1>Votre compte mérite <span>une communauté qui grandit.</span></h1>
           <p className="hero-description">
             Développez votre communauté en faisant découvrir votre compte à de nouvelles personnes susceptibles de s’y abonner.
           </p>
@@ -81,10 +81,10 @@ export default function Home() {
               <div className="metric-card"><span>Communauté</span><strong><b>2.4</b>k</strong><small>↗ Activité réelle</small></div>
             </div>
             <div className="chart-card">
-              <div className="chart-caption"><span>Évolution de la visibilité</span><span>Cette semaine</span></div>
+              <div className="chart-caption"><span>Progression des abonnés</span><span>Cette semaine</span></div>
               <div className="chart">
-                <div className="chart-y"><span>3k</span><span>2k</span><span>1k</span><span>0</span></div>
-                <svg viewBox="0 0 420 132" preserveAspectRatio="none" role="img" aria-label="Courbe illustrative de progression">
+                <div className="chart-y"><span>+300</span><span>+200</span><span>+100</span><span>0</span></div>
+                <svg viewBox="0 0 420 132" preserveAspectRatio="none" role="img" aria-label="Courbe illustrative de progression des abonnés">
                   <defs><linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#2587ff" stopOpacity=".34"/><stop offset="100%" stopColor="#2587ff" stopOpacity="0"/></linearGradient></defs>
                   <path d="M0 108 C28 100 36 82 65 88 S105 99 130 71 S171 83 197 62 S238 75 265 44 S306 57 332 31 S384 42 420 8 V132 H0Z" fill="url(#chartFill)"/>
                   <path d="M0 108 C28 100 36 82 65 88 S105 99 130 71 S171 83 197 62 S238 75 265 44 S306 57 332 31 S384 42 420 8" stroke="#4aa4ff" strokeWidth="3" fill="none" strokeLinecap="round"/>
@@ -95,7 +95,7 @@ export default function Home() {
             </div>
             <div className="dashboard-bottom"><span className="bottom-check">✓</span><span>Votre campagne avance</span><span className="bottom-status">En cours</span></div>
           </div>
-          <div className="floating-tag tag-top"><span className="tag-icon">↗</span><span><b>Plus de portée</b><small>De vrais abonnés, librement</small></span></div>
+          <div className="floating-tag tag-top"><span className="tag-icon">↗</span><span><b>Plus de portée</b><small>Des personnes réelles, librement</small></span></div>
           <div className="floating-tag tag-bottom"><span className="tag-pulse" /><span><b>100 % orienté humain</b><small>Des choix libres et authentiques</small></span></div>
           <div className="visual-spark spark-one">✳</div><div className="visual-spark spark-two">✦</div>
         </div>
