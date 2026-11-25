@@ -3,10 +3,10 @@
 Application web responsive de campagnes de visibilité pour TikTok, YouTube et Facebook.
 
 ## Stack
-- Next.js App Router
-- React
+- Next.js 16 App Router
+- React 19
 - TypeScript
-- Supabase (Auth, PostgreSQL, Row Level Security)
+- Supabase Auth + PostgreSQL + Row Level Security
 - Vercel (déploiement continu depuis GitHub)
 
 ## Démarrage
@@ -16,14 +16,15 @@ npm run dev
 ```
 
 ## Variables d'environnement
-Créer un fichier `.env.local` à partir de ces variables :
-
 ```env
 NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=
 ```
 
-Ne jamais exposer une clé Supabase `service_role` ou une clé secrète dans le navigateur.
+La clé publishable est conçue pour être utilisée côté client avec les politiques RLS activées. Ne jamais exposer une clé secrète Supabase ou une clé service-role dans le navigateur.
+
+## Authentification
+Les routes `/connexion` et `/espace` utilisent Supabase Auth. La confirmation par e-mail renvoie vers `/auth/callback`. Les sessions sont gérées par cookies via `@supabase/ssr`.
 
 ## Base de données
 Le schéma initial est provisionné dans le projet Supabase `visiora-production`. Les tables exposées utilisent Row Level Security.
