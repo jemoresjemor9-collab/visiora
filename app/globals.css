@@ -263,3 +263,16 @@ h1 span,.platform-heading h2 span,.how-intro h2 span,.closing-content h2 span{co
 .password-visibility svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:600px){.auth-pane{padding:28px 21px 25px}.auth-pane h1{font-size:29px}.auth-switch{font-size:9px}}
 @media(prefers-reduced-motion:reduce){.auth-slider-track{transition:none}}
+
+.admin-tabs{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.admin-tabs a{padding:9px 12px;border:1px solid #34445d;border-radius:8px;color:#a9bbd3;text-decoration:none;font-size:10px}
+.admin-tabs a.active{background:#17385d;border-color:#4c9fff;color:#fff}
+.participant-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.participant-form{display:grid;gap:12px;padding:18px;border:1px solid #2b3b55;background:#101a2b;border-radius:12px}
+.participant-form h3,.participant-list h3{font:700 14px var(--display);margin:0 0 3px}
+.participant-form label{display:grid;gap:7px;color:#c6d4e7;font-size:10px}
+.participant-form input,.participant-form select,.participant-search{width:100%;padding:11px;border:1px solid #34445d;border-radius:8px;background:#0a1424;color:#fff;font:11px var(--font)}
+.participant-form small{font-size:9px;color:#8fa3bf;line-height:1.6}
+.participant-form .button{border:0;cursor:pointer}
+.participant-search{margin:0 0 12px}
+@media(max-width:760px){.participant-grid{grid-template-columns:1fr}.admin-tabs{order:3;width:100%;padding-bottom:10px}.workspace-header{height:auto;min-height:72px;flex-wrap:wrap}.admin-tabs a{padding:7px 9px}}
