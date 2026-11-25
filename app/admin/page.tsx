@@ -33,7 +33,7 @@ export default async function AdminPage() {
   return <main className="workspace-page">
     <header className="workspace-header">
       <Link href="/" className="brand"><span className="brand-mark"><img src="/visiora-mark.svg" alt="" /></span><span>Visiora<span className="brand-period">.</span></span></Link>
-      <Link href="/espace" className="workspace-logout">Espace client</Link>
+      <nav className="admin-tabs"><Link href="/admin">Vue générale</Link><Link href="/admin/campagnes">Campagnes</Link><Link href="/admin/participants">Participants</Link></nav><Link href="/espace" className="workspace-logout">Espace client</Link>
     </header>
     <section className="workspace-main">
       <div className="auth-kicker">ADMINISTRATION · {admin.role.toUpperCase()}</div>
