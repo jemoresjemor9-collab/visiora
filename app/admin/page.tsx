@@ -1,26 +1,46 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import AdminDashboard from "./dashboard";
 
 export default async function AdminPage() {
   const supabase = await createClient();
-  const {data:claimsData} = await supabase.auth.getClaims();
-  if(!claimsData?.claims?.sub) redirect("/connexion");
+  const { data: claimsData } = await supabase.auth.getClaims();
+  if (!claimsData?.claims?.sub) redirect("/connexion");
   const userId = claimsData.claims.sub as string;
-  const {data:admin} = await supabase.from("admin_users").select("role").eq("user_id",userId).maybeSingle();
-  if(!admin) redirect("/espace");
+  const { data: admin } = await supabase.from("admin_users").select("role").eq("user_id", userId).maybeSingle();
+  if (!admin) redirect("/espace");
 
-  const [{data:campaigns},{data:payments},{data:threads}] = await Promise.all([
-    supabase.from("campaigns").select("id,title,platform,status,budget_amount,currency,created_at").in("status",["pending_review","active","paused","completed"]).order("created_at",{ascending:false}).limit(30),
-    supabase.from("payments").select("id,campaign_id,amount,currency,status,provider,created_at").order("created_at",{ascending:false}).limit(30),
-    supabase.from("conversation_threads").select("id,subject,status,last_message_at,user_id").order("last_message_at",{ascending:false}).limit(30)
+  const [{ data: campaigns }, { data: payments }, { data: threads }] = await Promise.all([
+    supabase.from("campaigns").select("id,user_id,platform,platform_url,target_subscribers,status,budget_amount,currency,created_at,title").order("created_at", { ascending: false }).limit(200),
+    supabase.from("payments").select("id,user_id,campaign_id,amount,currency,status,provider,provider_reference,proof_url,admin_note,verified_at,created_at").order("created_at", { ascending: false }).limit(200),
+    supabase.from("conversation_threads").select("id,subject,status,last_message_at,user_id,campaign_id").order("last_message_at", { ascending: false }).limit(100)
   ]);
 
-  return <main className="workspace-page"><header className="workspace-header"><Link href="/" className="brand"><span className="brand-mark"><img src="/visiora-mark.svg" alt="" /></span><span>Visiora<span className="brand-period">.</span></span></Link><Link href="/espace" className="workspace-logout">Espace client</Link></header>
-  <section className="workspace-main"><div className="auth-kicker">ADMINISTRATION · {admin.role.toUpperCase()}</div><h1>Tableau de bord.</h1><p className="workspace-email">Campagnes abonnés, paiements et assistance.</p>
-  <div className="admin-stats"><div><strong>{campaigns?.length||0}</strong><span>Campagnes récentes</span></div><div><strong>{payments?.filter(p=>p.status==="pending").length||0}</strong><span>Paiements à vérifier</span></div><div><strong>{threads?.filter(t=>t.status==="waiting_admin").length||0}</strong><span>Messages en attente</span></div></div>
-  <div className="admin-section"><h2>Campagnes d’acquisition d’abonnés</h2>{campaigns?.length?campaigns.map(c=><article className="admin-row" key={c.id}><div><strong>{c.title}</strong><small>{c.platform} · {new Date(c.created_at).toLocaleDateString("fr-FR")}</small></div><div><b>{Number(c.budget_amount).toLocaleString("fr-FR")} {c.currency}</b><small>{c.status}</small></div></article>):<p className="admin-empty">Aucune demande pour le moment.</p>}</div>
-  <div className="admin-section"><h2>Paiements</h2>{payments?.length?payments.map(p=><article className="admin-row" key={p.id}><div><strong>{Number(p.amount).toLocaleString("fr-FR")} {p.currency}</strong><small>{p.provider||"Prestataire à définir"}</small></div><span className={p.status==="succeeded"?"status-good":"status-pending"}>{p.status}</span></article>):<p className="admin-empty">Aucun paiement enregistré.</p>}</div>
-  <div className="admin-section"><h2>Conversations clients</h2>{threads?.length?threads.map(t=><Link href={"/admin/conversations/"+t.id} className="admin-row" key={t.id}><div><strong>{t.subject}</strong><small>Client · {new Date(t.last_message_at).toLocaleString("fr-FR")}</small></div><span className="status-pending">{t.status}</span></Link>):<p className="admin-empty">Aucun message reçu.</p>}</div>
-  </section></main>;
+  const userIds = [...new Set([
+    ...(campaigns || []).map(item => item.user_id),
+    ...(payments || []).map(item => item.user_id),
+    ...(threads || []).map(item => item.user_id)
+  ])];
+  const { data: profiles } = userIds.length
+    ? await supabase.from("profiles").select("id,display_name,avatar_url,phone,country_code").in("id", userIds)
+    : { data: [] };
+
+  return <main className="workspace-page">
+    <header className="workspace-header">
+      <Link href="/" className="brand"><span className="brand-mark"><img src="/visiora-mark.svg" alt="" /></span><span>Visiora<span className="brand-period">.</span></span></Link>
+      <Link href="/espace" className="workspace-logout">Espace client</Link>
+    </header>
+    <section className="workspace-main">
+      <div className="auth-kicker">ADMINISTRATION · {admin.role.toUpperCase()}</div>
+      <h1>Tableau de bord.</h1>
+      <p className="workspace-email">Gestion des campagnes, vérification des paiements et assistance client.</p>
+      <AdminDashboard
+        initialCampaigns={campaigns || []}
+        initialPayments={payments || []}
+        initialThreads={threads || []}
+        profiles={profiles || []}
+      />
+    </section>
+  </main>;
 }
