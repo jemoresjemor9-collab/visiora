@@ -7,7 +7,8 @@ import { createClient } from "@/lib/supabase/client";
 type Campaign = {id:string;user_id:string;platform:string;platform_url:string;target_subscribers:number;status:string;budget_amount:number|string;currency:string;created_at:string;title:string};
 type Payment = {id:string;user_id:string;campaign_id:string|null;amount:number|string;currency:string;status:string;provider:string|null;provider_reference:string|null;proof_url:string|null;admin_note:string|null;verified_at:string|null;created_at:string};
 type Thread = {id:string;subject:string;status:string;last_message_at:string;user_id:string;campaign_id:string|null};
-type Profile = {id:string;display_name:string|null;avatar_url:string|null;phone:string|null;country_code:string|null};\ntype FollowEvent = {campaign_id:string;event_type:string};
+type Profile = {id:string;display_name:string|null;avatar_url:string|null;phone:string|null;country_code:string|null};
+type FollowEvent = {campaign_id:string;event_type:string};
 
 const statusLabels:Record<string,string>={draft:"Brouillon",pending_payment:"Paiement attendu",pending_review:"À valider",active:"En cours",paused:"En pause",completed:"Terminée",cancelled:"Annulée",rejected:"Refusée",pending:"En attente",succeeded:"Confirmé",failed:"Échoué",refunded:"Remboursé",open:"Ouverte",waiting_admin:"À traiter",waiting_user:"En attente du client",closed:"Fermée"};
 const money=(value:number|string,currency="XOF")=>`${Number(value).toLocaleString("fr-FR")} ${currency==="XOF"?"FCFA":currency}`;
@@ -23,7 +24,8 @@ export default function AdminDashboard({initialCampaigns,initialPayments,initial
   const [busy,setBusy]=useState<string|null>(null);
   const [notice,setNotice]=useState("");
   const [error,setError]=useState("");
-  const profileById=useMemo(()=>new Map(profiles.map(p=>[p.id,p])),[profiles]);\n  const deliveredByCampaign=useMemo(()=>{const counts=new Map<string,number>();for(const event of followEvents)counts.set(event.campaign_id,(counts.get(event.campaign_id)||0)+1);return counts;},[followEvents]);
+  const profileById=useMemo(()=>new Map(profiles.map(p=>[p.id,p])),[profiles]);
+  const deliveredByCampaign=useMemo(()=>{const counts=new Map<string,number>();for(const event of followEvents)counts.set(event.campaign_id,(counts.get(event.campaign_id)||0)+1);return counts;},[followEvents]);
   const visibleCampaigns=campaigns.filter(c=>(filter==="all"||c.status===filter)&&(platform==="all"||c.platform===platform)&&(`${c.title} ${c.platform_url} ${profileById.get(c.user_id)?.display_name||""}`).toLowerCase().includes(search.toLowerCase()));
   const pendingPayments=payments.filter(p=>p.status==="pending");
   const waitingThreads=threads.filter(t=>t.status==="waiting_admin"||t.status==="open");
