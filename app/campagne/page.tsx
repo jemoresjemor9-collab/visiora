@@ -10,13 +10,13 @@ const platformLabels = { tiktok: "TikTok", youtube: "YouTube", facebook: "Facebo
 function isProfileUrl(platform: "tiktok" | "youtube" | "facebook", value: string) {
   try {
     const parsed = new URL(value);
-    const host = parsed.hostname.toLowerCase().replace(/^www\\./, "");
-    const path = parsed.pathname.replace(/\\/$/, "");
-    if (platform === "tiktok") return ["tiktok.com", "m.tiktok.com"].includes(host) && /^\\/@[^/]+$/.test(path);
-    if (platform === "youtube") return ["youtube.com", "m.youtube.com"].includes(host) && /^\\/(?:@[^/]+|channel\\/[^/]+|c\\/[^/]+|user\\/[^/]+)$/.test(path);
+    const host = parsed.hostname.toLowerCase().replace(/^www\./, "");
+    const path = parsed.pathname.replace(/\/$/, "");
+    if (platform === "tiktok") return ["tiktok.com", "m.tiktok.com"].includes(host) && /^\/@[^/]+$/.test(path);
+    if (platform === "youtube") return ["youtube.com", "m.youtube.com"].includes(host) && /^\/(?:@[^/]+|channel\/[^/]+|c\/[^/]+|user\/[^/]+)$/.test(path);
     return ["facebook.com", "m.facebook.com", "fb.com"].includes(host) &&
       ((path === "/profile.php" && Boolean(parsed.searchParams.get("id"))) ||
-       /^\\/(?:pages\\/[^/]+\\/[^/]+|[^/]+)$/.test(path));
+       /^\/(?:pages\/[^/]+\/[^/]+|[^/]+)$/.test(path));
   } catch {
     return false;
   }
