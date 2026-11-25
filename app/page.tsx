@@ -36,7 +36,7 @@ export default function Home() {
       <header className="site-header container">
         <a className="brand" href="#" aria-label="Visiora, accueil">
           <BrandMark />
-          <span>visiora<span className="brand-period">.</span></span>
+          <span>Visiora<span className="brand-period">.</span></span>
         </a>
         <nav className="desktop-nav" aria-label="Navigation principale">
           <a href="/campagne">Plateformes</a>
@@ -72,7 +72,7 @@ export default function Home() {
           <div className="orbit orbit-two" />
           <div className="dashboard-card">
             <div className="dashboard-top">
-              <div className="mini-brand"><BrandMark small /><span>visiora</span></div>
+              <div className="mini-brand"><BrandMark small /><span>Visiora</span></div>
               <span className="live-pill"><i /> CAMPAGNE ACTIVE</span>
             </div>
             <div className="dashboard-heading">
@@ -136,7 +136,7 @@ export default function Home() {
       </section>
 
       <footer className="site-footer container" id="connexion">
-        <a className="brand footer-brand" href="#"><BrandMark /><span>visiora<span className="brand-period">.</span></span></a>
+        <a className="brand footer-brand" href="#"><BrandMark /><span>Visiora<span className="brand-period">.</span></span></a>
         <p>La visibilité se construit. Faites le premier pas.</p>
         <span className="copyright">© {new Date().getFullYear()} Visiora. Tous droits réservés.</span>
       </footer>
