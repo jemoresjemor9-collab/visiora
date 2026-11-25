@@ -21,7 +21,7 @@ export default async function EspacePage() {
         <div className="auth-kicker">VOTRE ESPACE PERSONNEL</div>
         <h1>Bienvenue sur Visiora.</h1>
         <p className="workspace-email">{email}</p>
-        <div className="workspace-panel">
+        <div className="workspace-actions"><Link className="button button-primary" href="/campagne">Créer une campagne ↗</Link><Link className="workspace-logout" href="/messages">Contacter l’équipe</Link></div><div className="workspace-panel">
           <div><span className="workspace-panel-icon">↗</span><h2>Votre espace est prêt.</h2><p>Votre compte est connecté. Nous préparons maintenant la création et le suivi de vos campagnes.</p></div>
           <span className="workspace-badge">Compte actif</span>
         </div>
