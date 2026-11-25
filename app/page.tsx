@@ -44,8 +44,8 @@ export default function Home() {
           <a href="#avantages">Avantages</a>
         </nav>
         <div className="header-actions">
-          <a className="login-link" href="#connexion">Connexion</a>
-          <a className="button button-small button-outline" href="#demarrer">Commencer <ArrowUpRight /></a>
+          <a className="login-link" href="/connexion">Connexion</a>
+          <a className="button button-small button-outline" href="/connexion">Commencer <ArrowUpRight /></a>
         </div>
       </header>
 
@@ -130,7 +130,7 @@ export default function Home() {
       <section className="closing-section container" id="avantages">
         <div className="closing-card">
           <div className="closing-orb orb-a" /><div className="closing-orb orb-b" />
-          <div className="closing-content"><div className="section-kicker">À VOUS DE JOUER</div><h2>Faites passer votre visibilité<br /><span>à la vitesse supérieure.</span></h2><p>Votre prochaine audience est peut-être à une campagne de vous.</p><a className="button button-primary" href="#connexion">Démarrer avec Visiora <ArrowUpRight /></a></div>
+          <div className="closing-content"><div className="section-kicker">À VOUS DE JOUER</div><h2>Faites passer votre visibilité<br /><span>à la vitesse supérieure.</span></h2><p>Votre prochaine audience est peut-être à une campagne de vous.</p><a className="button button-primary" href="/connexion">Démarrer avec Visiora <ArrowUpRight /></a></div>
           <div className="closing-mark"><BrandMark /></div>
         </div>
       </section>
