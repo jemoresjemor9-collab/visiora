@@ -27,7 +27,7 @@ export default function Home() {
     <main>
       <div className="announcement">
         <span className="announcement-dot" />
-        La visibilité commence par une vraie rencontre avec votre audience.
+        Les abonnés se gagnent par la découverte et le choix libre de votre profil.
       </div>
 
       <header className="site-header container">
@@ -48,7 +48,7 @@ export default function Home() {
 
       <section className="hero container">
         <div className="hero-copy">
-          <div className="eyebrow"><span className="eyebrow-line" /> LA VISIBILITÉ, EN MOUVEMENT</div>
+          <div className="eyebrow"><span className="eyebrow-line" /> LA CROISSANCE DE VOS ABONNÉS</div>
           <h1>Votre compte mérite <span>une communauté qui grandit.</span></h1>
           <p className="hero-description">
             Développez votre communauté en faisant découvrir votre compte à de nouvelles personnes susceptibles de s’y abonner.
@@ -70,15 +70,15 @@ export default function Home() {
           <div className="dashboard-card">
             <div className="dashboard-top">
               <div className="mini-brand"><BrandMark small /><span>Visiora</span></div>
-              <span className="live-pill"><i /> CAMPAGNE ACTIVE</span>
+              <span className="live-pill"><i /> APERÇU ILLUSTRATIF</span>
             </div>
             <div className="dashboard-heading">
               <div><span className="muted-label">VOTRE ESPACE</span><h3>Vue d’ensemble</h3></div>
               <span className="period-chip">7 derniers jours⌄</span>
             </div>
             <div className="metric-grid">
-              <div className="metric-card"><span>Nouveaux abonnés</span><strong>+<b>38</b>%</strong><small>↗ Progression</small></div>
-              <div className="metric-card"><span>Communauté</span><strong><b>2.4</b>k</strong><small>↗ Activité réelle</small></div>
+              <div className="metric-card"><span>Abonnés gagnés</span><strong>+<b>38</b></strong><small>Exemple illustratif</small></div>
+              <div className="metric-card"><span>Objectif indicatif</span><strong><b>2.4</b>k</strong><small>Abonnés souhaités</small></div>
             </div>
             <div className="chart-card">
               <div className="chart-caption"><span>Progression des abonnés</span><span>Cette semaine</span></div>
@@ -95,8 +95,8 @@ export default function Home() {
             </div>
             <div className="dashboard-bottom"><span className="bottom-check">✓</span><span>Votre campagne avance</span><span className="bottom-status">En cours</span></div>
           </div>
-          <div className="floating-tag tag-top"><span className="tag-icon">↗</span><span><b>Plus de portée</b><small>Des personnes réelles, librement</small></span></div>
-          <div className="floating-tag tag-bottom"><span className="tag-pulse" /><span><b>100 % orienté humain</b><small>Des choix libres et authentiques</small></span></div>
+          <div className="floating-tag tag-top"><span className="tag-icon">↗</span><span><b>Plus d’abonnés</b><small>Des personnes réelles, librement</small></span></div>
+          <div className="floating-tag tag-bottom"><span className="tag-pulse" /><span><b>Abonnements volontaires</b><small>Des choix libres et authentiques</small></span></div>
           <div className="visual-spark spark-one">✳</div><div className="visual-spark spark-two">✦</div>
         </div>
       </section>
@@ -117,7 +117,7 @@ export default function Home() {
 
       <section className="how-section" id="fonctionnement">
         <div className="container">
-          <div className="how-intro"><div><div className="section-kicker">SIMPLE. CLAIR. EFFICACE.</div><h2>De l’idée à la visibilité.<br /><span>En trois étapes.</span></h2></div><p>Gardez le contrôle de vos campagnes d’acquisition d’abonnés, de leur lancement jusqu’au suivi.</p></div>
+          <div className="how-intro"><div><div className="section-kicker">SIMPLE. CLAIR. EFFICACE.</div><h2>De votre profil à une communauté qui grandit.<br /><span>En trois étapes.</span></h2></div><p>Gardez le contrôle de vos campagnes d’acquisition d’abonnés, de leur lancement jusqu’au suivi.</p></div>
           <div className="steps-grid">
             {steps.map((step) => <article className="step-card" key={step.number}><span className="step-number">{step.number}</span><div className="step-line" /><h3>{step.title}</h3><p>{step.text}</p></article>)}
           </div>
@@ -127,14 +127,14 @@ export default function Home() {
       <section className="closing-section container" id="avantages">
         <div className="closing-card">
           <div className="closing-orb orb-a" /><div className="closing-orb orb-b" />
-          <div className="closing-content"><div className="section-kicker">À VOUS DE JOUER</div><h2>Faites passer votre visibilité<br /><span>à la vitesse supérieure.</span></h2><p>Votre prochaine audience est peut-être à une campagne de vous.</p><a className="button button-primary" href="/connexion">Démarrer avec Visiora <ArrowUpRight /></a></div>
+          <div className="closing-content"><div className="section-kicker">À VOUS DE JOUER</div><h2>Faites grandir votre communauté<br /><span>à la vitesse supérieure.</span></h2><p>Votre prochaine audience est peut-être à une campagne de vous.</p><a className="button button-primary" href="/connexion">Démarrer avec Visiora <ArrowUpRight /></a></div>
           <div className="closing-mark"><BrandMark /></div>
         </div>
       </section>
 
       <footer className="site-footer container" id="connexion">
         <a className="brand footer-brand" href="#"><BrandMark /><span>Visiora<span className="brand-period">.</span></span></a>
-        <p>La visibilité se construit. Faites le premier pas.</p>
+        <p>Les communautés grandissent. Faites le premier pas.</p>
         <span className="copyright">© {new Date().getFullYear()} Visiora. Tous droits réservés.</span>
       </footer>
     </main>
