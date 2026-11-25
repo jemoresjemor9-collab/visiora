@@ -207,3 +207,5 @@ h1 span,.platform-heading h2 span,.how-intro h2 span,.closing-content h2 span{co
 @media(max-width:680px){.flow-page{padding-inline:18px}.flow-header{height:72px}.flow-wrap{margin-top:44px}.flow-card{padding:19px}.chat-layout{grid-template-columns:1fr}.chat-sidebar{max-height:180px;overflow:auto}.chat-panel{min-height:430px}.chat-compose{flex-direction:column}.chat-compose .button{width:100%}.admin-stats{grid-template-columns:1fr}.admin-row{align-items:flex-start}}
 
 .workspace-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 24px}.workspace-actions .workspace-logout{display:inline-flex;text-decoration:none}
+
+.field-hint{font-size:9px;color:#7f94b1;font-weight:400;line-height:1.5}
