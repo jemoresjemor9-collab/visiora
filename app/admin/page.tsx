@@ -11,12 +11,15 @@ export default async function AdminPage() {
   const { data: admin } = await supabase.from("admin_users").select("role").eq("user_id", userId).maybeSingle();
   if (!admin) redirect("/espace");
 
-  const [{ data: campaigns }, { data: payments }, { data: threads }, { data: events }] = await Promise.all([
-    supabase.from("campaigns").select("id,user_id,platform,platform_url,target_subscribers,status,budget_amount,currency,created_at,title").order("created_at", { ascending: false }).limit(200),
-    supabase.from("payments").select("id,user_id,campaign_id,amount,currency,status,provider,provider_reference,proof_url,admin_note,verified_at,created_at").order("created_at", { ascending: false }).limit(200),
+  const [{ data: metricsRows }, { data: campaigns }, { data: payments }, { data: threads }, { data: events }] = await Promise.all([
+    supabase.rpc("admin_dashboard_metrics"),
+    supabase.from("campaigns").select("id,user_id,platform,platform_url,target_subscribers,status,budget_amount,currency,created_at,title").order("created_at", { ascending: false }).limit(500),
+    supabase.from("payments").select("id,user_id,campaign_id,amount,currency,status,provider,provider_reference,proof_url,admin_note,verified_at,created_at").order("created_at", { ascending: false }).limit(500),
     supabase.from("conversation_threads").select("id,subject,status,last_message_at,user_id,campaign_id").order("last_message_at", { ascending: false }).limit(100),
     supabase.from("campaign_events").select("campaign_id,event_type").eq("event_type", "voluntary_follow").limit(10000)
   ]);
+
+  const metrics = Array.isArray(metricsRows) ? metricsRows[0] : metricsRows;
 
   const userIds = [...new Set([
     ...(campaigns || []).map(item => item.user_id),
@@ -42,6 +45,7 @@ export default async function AdminPage() {
         initialThreads={threads || []}
         profiles={profiles || []}
         followEvents={events || []}
+        metrics={metrics || { total_users: 0, total_campaigns: 0, completed_campaigns: 0, in_progress_campaigns: 0, new_campaigns: 0, total_payments: 0, pending_payments: 0, paid_amount_xof: 0 }}
       />
     </section>
   </main>;
