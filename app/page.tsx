@@ -1,7 +1,7 @@
 const platforms = [
   { name: "TikTok", mark: "t", className: "tiktok", detail: "Faites découvrir vos vidéos" },
   { name: "YouTube", mark: "▶", className: "youtube", detail: "Donnez de l’élan à vos contenus" },
-  { name: "Facebook", mark: "f", className: "facebook", detail: "Développez votre communauté" },
+  { name: "Facebook", mark: "f", className: "facebook", detail: "Attirez de nouveaux abonnés" },
 ];
 
 const steps = [
@@ -13,10 +13,7 @@ const steps = [
 function BrandMark({ small = false }: { small?: boolean }) {
   return (
     <span className={small ? "brand-mark brand-mark-small" : "brand-mark"} aria-hidden="true">
-      <svg viewBox="0 0 42 42" fill="none">
-        <path d="M7 31.5 17.8 8h6.4L35 31.5h-7.2L21 17.1l-6.8 14.4H7Z" fill="currentColor" />
-        <path d="m18.1 26.8 3-6.5 3 6.5h-6Z" fill="#42A5FF" />
-      </svg>
+      <img src="/visiora-mark.svg" alt="" />
     </span>
   );
 }
@@ -54,7 +51,7 @@ export default function Home() {
           <div className="eyebrow"><span className="eyebrow-line" /> LA VISIBILITÉ, EN MOUVEMENT</div>
           <h1>Votre contenu mérite <span>le devant de la scène.</span></h1>
           <p className="hero-description">
-            Faites découvrir vos contenus, touchez de nouvelles audiences et développez votre présence sur les réseaux sociaux.
+            Développez votre communauté en faisant découvrir votre compte à de nouvelles personnes susceptibles de s’y abonner.
           </p>
           <div className="hero-actions" id="demarrer">
             <a className="button button-primary" href="/campagne">Lancer ma campagne <ArrowUpRight /></a>
@@ -80,8 +77,8 @@ export default function Home() {
               <span className="period-chip">7 derniers jours⌄</span>
             </div>
             <div className="metric-grid">
-              <div className="metric-card"><span>Portée de campagne</span><strong>+<b>38</b>%</strong><small>↗ Progression</small></div>
-              <div className="metric-card"><span>Interactions</span><strong><b>2.4</b>k</strong><small>↗ Activité réelle</small></div>
+              <div className="metric-card"><span>Nouveaux abonnés</span><strong>+<b>38</b>%</strong><small>↗ Progression</small></div>
+              <div className="metric-card"><span>Communauté</span><strong><b>2.4</b>k</strong><small>↗ Activité réelle</small></div>
             </div>
             <div className="chart-card">
               <div className="chart-caption"><span>Évolution de la visibilité</span><span>Cette semaine</span></div>
@@ -98,7 +95,7 @@ export default function Home() {
             </div>
             <div className="dashboard-bottom"><span className="bottom-check">✓</span><span>Votre campagne avance</span><span className="bottom-status">En cours</span></div>
           </div>
-          <div className="floating-tag tag-top"><span className="tag-icon">↗</span><span><b>Plus de portée</b><small>Une audience à découvrir</small></span></div>
+          <div className="floating-tag tag-top"><span className="tag-icon">↗</span><span><b>Plus de portée</b><small>De vrais abonnés, librement</small></span></div>
           <div className="floating-tag tag-bottom"><span className="tag-pulse" /><span><b>100 % orienté humain</b><small>Des choix libres et authentiques</small></span></div>
           <div className="visual-spark spark-one">✳</div><div className="visual-spark spark-two">✦</div>
         </div>
@@ -106,7 +103,7 @@ export default function Home() {
 
       <section className="platform-section container" id="plateformes">
         <div className="section-kicker">UN SEUL ESPACE. VOS RÉSEAUX.</div>
-        <div className="platform-heading"><h2>Votre présence, <span>sur les bonnes plateformes.</span></h2><p>Choisissez où vous souhaitez gagner en visibilité.</p></div>
+        <div className="platform-heading"><h2>Votre présence, <span>sur les bonnes plateformes.</span></h2><p>Choisissez le réseau sur lequel vous souhaitez développer votre communauté.</p></div>
         <div className="platform-grid">
           {platforms.map((platform) => (
             <a className="platform-card" href="/campagne" key={platform.name}>
@@ -120,7 +117,7 @@ export default function Home() {
 
       <section className="how-section" id="fonctionnement">
         <div className="container">
-          <div className="how-intro"><div><div className="section-kicker">SIMPLE. CLAIR. EFFICACE.</div><h2>De l’idée à la visibilité.<br /><span>En trois étapes.</span></h2></div><p>Gardez le contrôle de vos campagnes, de leur lancement jusqu’au suivi des résultats.</p></div>
+          <div className="how-intro"><div><div className="section-kicker">SIMPLE. CLAIR. EFFICACE.</div><h2>De l’idée à la visibilité.<br /><span>En trois étapes.</span></h2></div><p>Gardez le contrôle de vos campagnes d’acquisition d’abonnés, de leur lancement jusqu’au suivi.</p></div>
           <div className="steps-grid">
             {steps.map((step) => <article className="step-card" key={step.number}><span className="step-number">{step.number}</span><div className="step-line" /><h3>{step.title}</h3><p>{step.text}</p></article>)}
           </div>
