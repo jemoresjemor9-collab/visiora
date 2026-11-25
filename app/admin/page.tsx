@@ -11,10 +11,11 @@ export default async function AdminPage() {
   const { data: admin } = await supabase.from("admin_users").select("role").eq("user_id", userId).maybeSingle();
   if (!admin) redirect("/espace");
 
-  const [{ data: campaigns }, { data: payments }, { data: threads }] = await Promise.all([
+  const [{ data: campaigns }, { data: payments }, { data: threads }, { data: events }] = await Promise.all([
     supabase.from("campaigns").select("id,user_id,platform,platform_url,target_subscribers,status,budget_amount,currency,created_at,title").order("created_at", { ascending: false }).limit(200),
     supabase.from("payments").select("id,user_id,campaign_id,amount,currency,status,provider,provider_reference,proof_url,admin_note,verified_at,created_at").order("created_at", { ascending: false }).limit(200),
-    supabase.from("conversation_threads").select("id,subject,status,last_message_at,user_id,campaign_id").order("last_message_at", { ascending: false }).limit(100)
+    supabase.from("conversation_threads").select("id,subject,status,last_message_at,user_id,campaign_id").order("last_message_at", { ascending: false }).limit(100),
+    supabase.from("campaign_events").select("campaign_id,event_type").eq("event_type", "voluntary_follow").limit(10000)
   ]);
 
   const userIds = [...new Set([
