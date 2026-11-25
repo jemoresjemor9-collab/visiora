@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Lancez des campagnes de visibilité pour vos contenus TikTok, YouTube et Facebook. Touchez votre audience et développez votre présence.",
   applicationName: "Visiora",
-  icons: { icon: "/icon.svg", shortcut: "/icon.svg" },
+  icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }], shortcut: "/favicon.svg" },
   openGraph: {
     title: "Visiora — Votre visibilité mérite mieux que le hasard",
     description:
