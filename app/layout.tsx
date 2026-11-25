@@ -2,13 +2,13 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Visiora — Faites grandir votre visibilité",
+  title: "Visiora — Développez vos abonnés",
   description:
-    "Lancez des campagnes de visibilité pour vos contenus TikTok, YouTube et Facebook. Touchez votre audience et développez votre présence.",
+    "Lancez une campagne pour développer les abonnés de votre compte TikTok, YouTube ou Facebook grâce à la découverte et aux abonnements volontaires.",
   applicationName: "Visiora",
   icons: { icon: [{ url: "/favicon.svg", type: "image/svg+xml" }], shortcut: "/favicon.svg" },
   openGraph: {
-    title: "Visiora — Votre visibilité mérite mieux que le hasard",
+    title: "Visiora — Faites grandir votre communauté",
     description:
       "Des campagnes simples pour faire découvrir vos contenus aux bonnes personnes.",
     siteName: "Visiora",
