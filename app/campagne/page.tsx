@@ -56,7 +56,7 @@ export default function CampaignRequestPage() {
       });
       if (paymentError) throw paymentError;
 
-      setDone("Votre demande est enregistrée. Elle apparaîtra dans votre espace dès que le paiement sera confirmé. Les instructions de paiement seront ajoutées après le choix du prestataire.");
+      setDone("Votre demande est enregistrée. Elle apparaîtra dans votre espace dès que le paiement sera confirmé. Le moyen de paiement sera activé dès que le prestataire sera configuré.");
       setUrl(""); setTitle(""); setBrief("");
     } catch (e) {
       setError(e instanceof Error ? e.message : "Impossible d’enregistrer la demande.");
@@ -92,7 +92,7 @@ export default function CampaignRequestPage() {
           <label>Précisions (facultatif)<textarea rows={3} maxLength={1500} value={brief} onChange={e=>setBrief(e.target.value)} placeholder="Décrivez votre public, votre contenu ou vos attentes…" /></label>
           {error && <p className="auth-error">{error}</p>}
           {done && <p className="auth-success">{done}</p>}
-          <button className="button button-primary auth-submit" disabled={busy}>{busy?"Enregistrement…":"Continuer vers le paiement"} <span>↗</span></button>
+          <button className="button button-primary auth-submit" disabled={busy}>{busy?"Enregistrement…":"Enregistrer ma demande"} <span>↗</span></button>
           <p className="auth-terms">Les abonnements et interactions ne sont jamais artificiels ni garantis. Les campagnes reposent sur la découverte et le choix libre des utilisateurs.</p>
         </form>
       </section>
