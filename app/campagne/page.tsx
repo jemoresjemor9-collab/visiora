@@ -13,7 +13,7 @@ export default function CampaignRequestPage() {
   const [platform, setPlatform] = useState<"tiktok"|"youtube"|"facebook">("tiktok");
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
-  const [objective, setObjective] = useState<"reach"|"views"|"engagement">("reach");
+  const [objective, setObjective] = useState<"followers">("followers");
   const [budget, setBudget] = useState("5000");
   const [target, setTarget] = useState("1000");
   const [brief, setBrief] = useState("");
@@ -38,7 +38,7 @@ export default function CampaignRequestPage() {
           platform,
           platform_url: url.trim(),
           objective,
-          target_visits: Number(target),
+          target_subscribers: Number(target),
           title: title.trim(),
           brief: brief.trim() || null,
           budget_amount: amount,
@@ -68,13 +68,13 @@ export default function CampaignRequestPage() {
   return (
     <main className="flow-page">
       <header className="flow-header">
-        <Link href="/" className="brand"><span className="brand-mark"><svg viewBox="0 0 42 42" fill="none"><path d="M8.5 9.5L19.6 31.8C20.2 33 21.8 33 22.4 31.8L33.5 9.5" stroke="currentColor" strokeWidth="6.2" strokeLinecap="round" strokeLinejoin="round"/><path d="M15.8 9.5L21 20" stroke="#8CC8FF" strokeWidth="2.4" strokeLinecap="round"/></svg></span><span>Visiora<span className="brand-period">.</span></span></Link>
+        <Link href="/" className="brand"><span className="brand-mark"><img src="/visiora-mark.svg" alt="" /></span><span>Visiora<span className="brand-period">.</span></span></Link>
         <Link href="/espace" className="auth-back-link">Mon espace →</Link>
       </header>
       <section className="flow-wrap">
         <div className="auth-kicker">NOUVELLE CAMPAGNE</div>
-        <h1>Faites découvrir votre contenu.</h1>
-        <p className="flow-lead">Décrivez votre objectif. Nous vous accompagnons pour toucher une audience réellement intéressée.</p>
+        <h1>Développez vos abonnés.</h1>
+        <p className="flow-lead">Présentez votre compte et définissez votre objectif indicatif de nouveaux abonnés authentiques.</p>
         <form className="flow-card" onSubmit={submit}>
           <label>Plateforme
             <div className="platform-choice">
@@ -82,21 +82,17 @@ export default function CampaignRequestPage() {
             </div>
           </label>
           <label>Lien du compte ou du contenu<input type="url" required value={url} onChange={e=>setUrl(e.target.value)} placeholder="https://..." /></label>
-          <label>Nom de la campagne<input required maxLength={100} value={title} onChange={e=>setTitle(e.target.value)} placeholder="Ex. Mise en avant de ma chaîne" /></label>
-          <label>Votre objectif
-            <select value={objective} onChange={e=>setObjective(e.target.value as typeof objective)}>
-              <option value="reach">Faire découvrir mon compte (portée)</option>
-              <option value="views">Obtenir des vues sur un contenu</option>
-              <option value="engagement">Encourager les interactions volontaires</option>
-            </select>
+          <label>Nom de votre campagne abonnés<input required maxLength={100} value={title} onChange={e=>setTitle(e.target.value)} placeholder="Ex. Mise en avant de ma chaîne" /></label>
+          <label>Objectif de la campagne
+            <input value="Développer des abonnés authentiques" readOnly />
           </label>
-          <label>Objectif indicatif de portée ou de vues<input type="number" min="0" step="100" value={target} onChange={e=>setTarget(e.target.value)} /><small className="field-hint">C’est une cible de campagne, pas une promesse d’abonnés ou de résultats garantis.</small></label>
+          <label>Nombre indicatif d’abonnés souhaités<input type="number" min="0" step="100" value={target} onChange={e=>setTarget(e.target.value)} /><small className="field-hint">C’est un objectif indicatif, pas une promesse de résultat ni un nombre garanti.</small></label>
           <label>Budget prévu (XOF)<input type="number" min="500" step="500" required value={budget} onChange={e=>setBudget(e.target.value)} /></label>
           <label>Précisions (facultatif)<textarea rows={3} maxLength={1500} value={brief} onChange={e=>setBrief(e.target.value)} placeholder="Décrivez votre public, votre contenu ou vos attentes…" /></label>
           {error && <p className="auth-error">{error}</p>}
           {done && <p className="auth-success">{done}</p>}
           <button className="button button-primary auth-submit" disabled={busy}>{busy?"Enregistrement…":"Enregistrer ma demande"} <span>↗</span></button>
-          <p className="auth-terms">Les abonnements et interactions ne sont jamais artificiels ni garantis. Les campagnes reposent sur la découverte et le choix libre des utilisateurs.</p>
+          <p className="auth-terms">Visiora favorise la découverte de comptes et les abonnements volontaires de personnes réelles. Aucun faux abonné, bot ou résultat garanti.</p>
         </form>
       </section>
     </main>
