@@ -59,7 +59,7 @@ export default function Home() {
           </div>
           <div className="hero-proof">
             <div className="proof-avatars" aria-hidden="true"><span>V</span><span>+</span><span>↗</span></div>
-            <p><strong>Une présence qui se construit.</strong><br />Avec des interactions authentiques.</p>
+            <p><strong>Une présence qui se construit.</strong><br />Avec des abonnements choisis librement.</p>
           </div>
         </div>
 
