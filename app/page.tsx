@@ -39,7 +39,7 @@ export default function Home() {
           <span>visiora<span className="brand-period">.</span></span>
         </a>
         <nav className="desktop-nav" aria-label="Navigation principale">
-          <a href="#plateformes">Plateformes</a>
+          <a href="/campagne">Plateformes</a>
           <a href="#fonctionnement">Comment ça marche</a>
           <a href="#avantages">Avantages</a>
         </nav>
@@ -57,7 +57,7 @@ export default function Home() {
             Faites découvrir vos contenus, touchez de nouvelles audiences et développez votre présence sur les réseaux sociaux.
           </p>
           <div className="hero-actions" id="demarrer">
-            <a className="button button-primary" href="#plateformes">Lancer ma campagne <ArrowUpRight /></a>
+            <a className="button button-primary" href="/campagne">Lancer ma campagne <ArrowUpRight /></a>
             <a className="text-link" href="#fonctionnement">Découvrir Visiora <span>→</span></a>
           </div>
           <div className="hero-proof">
@@ -109,7 +109,7 @@ export default function Home() {
         <div className="platform-heading"><h2>Votre présence, <span>sur les bonnes plateformes.</span></h2><p>Choisissez où vous souhaitez gagner en visibilité.</p></div>
         <div className="platform-grid">
           {platforms.map((platform) => (
-            <a className="platform-card" href="#demarrer" key={platform.name}>
+            <a className="platform-card" href="/campagne" key={platform.name}>
               <span className={`platform-icon ${platform.className}`}>{platform.mark}</span>
               <span className="platform-copy"><strong>{platform.name}</strong><small>{platform.detail}</small></span>
               <ArrowUpRight />
