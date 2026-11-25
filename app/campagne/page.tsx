@@ -38,7 +38,6 @@ export default function CampaignRequestPage() {
   const supabase = createClient();
   const [platform, setPlatform] = useState<"tiktok"|"youtube"|"facebook">("tiktok");
   const [url, setUrl] = useState("");
-  const [objective, setObjective] = useState<"followers">("followers");
   const [target, setTarget] = useState("1000");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
