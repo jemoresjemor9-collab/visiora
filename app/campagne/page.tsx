@@ -10,13 +10,24 @@ const platformLabels = { tiktok: "TikTok", youtube: "YouTube", facebook: "Facebo
 function isProfileUrl(platform: "tiktok" | "youtube" | "facebook", value: string) {
   try {
     const parsed = new URL(value);
-    const host = parsed.hostname.toLowerCase().replace(/^www\./, "");
-    const path = parsed.pathname.replace(/\/$/, "");
-    if (platform === "tiktok") return ["tiktok.com", "m.tiktok.com"].includes(host) && /^\/@[^/]+$/.test(path);
-    if (platform === "youtube") return ["youtube.com", "m.youtube.com"].includes(host) && /^\/(?:@[^/]+|channel\/[^/]+|c\/[^/]+|user\/[^/]+)$/.test(path);
+    let host = parsed.hostname.toLowerCase();
+    if (host.startsWith("www.")) host = host.slice(4);
+    const path = parsed.pathname.endsWith("/") ? parsed.pathname.slice(0, -1) : parsed.pathname;
+    const parts = path.split("/").filter(Boolean);
+
+    if (platform === "tiktok") {
+      return ["tiktok.com", "m.tiktok.com"].includes(host) &&
+        parts.length === 1 && parts[0].startsWith("@") && parts[0].length > 1;
+    }
+    if (platform === "youtube") {
+      return ["youtube.com", "m.youtube.com"].includes(host) &&
+        ((parts.length === 1 && parts[0].startsWith("@") && parts[0].length > 1) ||
+         (parts.length === 2 && ["channel", "c", "user"].includes(parts[0]) && parts[1].length > 0));
+    }
     return ["facebook.com", "m.facebook.com", "fb.com"].includes(host) &&
-      ((path === "/profile.php" && Boolean(parsed.searchParams.get("id"))) ||
-       /^\/(?:pages\/[^/]+\/[^/]+|[^/]+)$/.test(path));
+      ((parts.length === 1 && parts[0] === "profile.php" && Boolean(parsed.searchParams.get("id"))) ||
+       (parts.length === 1 && !["watch", "reel", "reels", "groups", "marketplace", "events", "login", "share"].includes(parts[0])) ||
+       (parts.length === 3 && parts[0] === "pages"));
   } catch {
     return false;
   }
