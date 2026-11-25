@@ -11,7 +11,7 @@ export default async function AdminPage() {
   if(!admin) redirect("/espace");
 
   const [{data:campaigns},{data:payments},{data:threads}] = await Promise.all([
-    supabase.from("campaigns").select("id,title,platform,status,budget_amount,currency,created_at").order("created_at",{ascending:false}).limit(30),
+    supabase.from("campaigns").select("id,title,platform,status,budget_amount,currency,created_at").in("status",["pending_review","active","paused","completed"]).order("created_at",{ascending:false}).limit(30),
     supabase.from("payments").select("id,campaign_id,amount,currency,status,provider,created_at").order("created_at",{ascending:false}).limit(30),
     supabase.from("conversation_threads").select("id,subject,status,last_message_at,user_id").order("last_message_at",{ascending:false}).limit(30)
   ]);
