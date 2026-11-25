@@ -1,3 +1,4 @@
+import { createClient } from "@/lib/supabase/server";
 const platforms = [
   { name: "TikTok", mark: "t", className: "tiktok", detail: "Gagnez de nouveaux abonnés" },
   { name: "YouTube", mark: "▶", className: "youtube", detail: "Développez votre communauté" },
@@ -22,7 +23,13 @@ function ArrowUpRight() {
   return <span aria-hidden="true" className="arrow-up-right">↗</span>;
 }
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient();
+  const { data: authData } = await supabase.auth.getClaims();
+  const isAuthenticated = Boolean(authData?.claims?.sub);
+  const accountHref = isAuthenticated ? "/espace" : "/connexion?mode=login";
+  const campaignHref = isAuthenticated ? "/campagne" : "/connexion?mode=signup";
+
   return (
     <main>
       <div className="announcement">
@@ -41,8 +48,8 @@ export default function Home() {
           <a href="#avantages">Avantages</a>
         </nav>
         <div className="header-actions">
-          <a className="login-link" href="/connexion?mode=login">Connexion</a>
-          <a className="button button-small button-outline" href="/connexion?mode=signup">Commencer <ArrowUpRight /></a>
+          <a className="login-link" href={accountHref}>{isAuthenticated ? "Mon espace" : "Connexion"}</a>
+          <a className="button button-small button-outline" href={campaignHref}>{isAuthenticated ? "Créer une campagne" : "Commencer"} <ArrowUpRight /></a>
         </div>
       </header>
 
@@ -54,7 +61,7 @@ export default function Home() {
             Développez votre communauté en faisant découvrir votre compte à de nouvelles personnes susceptibles de s’y abonner.
           </p>
           <div className="hero-actions" id="demarrer">
-            <a className="button button-primary" href="/connexion?mode=signup">Commencer ma campagne <ArrowUpRight /></a>
+            <a className="button button-primary" href={campaignHref}>{isAuthenticated ? "Lancer une campagne" : "Commencer ma campagne"} <ArrowUpRight /></a>
             <a className="text-link" href="#fonctionnement">Découvrir Visiora <span>→</span></a>
           </div>
           <div className="hero-proof">
@@ -127,7 +134,7 @@ export default function Home() {
       <section className="closing-section container" id="avantages">
         <div className="closing-card">
           <div className="closing-orb orb-a" /><div className="closing-orb orb-b" />
-          <div className="closing-content"><div className="section-kicker">À VOUS DE JOUER</div><h2>Faites grandir votre communauté<br /><span>à la vitesse supérieure.</span></h2><p>Votre prochaine audience est peut-être à une campagne de vous.</p><a className="button button-primary" href="/connexion?mode=signup">Démarrer avec Visiora <ArrowUpRight /></a></div>
+          <div className="closing-content"><div className="section-kicker">À VOUS DE JOUER</div><h2>Faites grandir votre communauté<br /><span>à la vitesse supérieure.</span></h2><p>Votre prochaine audience est peut-être à une campagne de vous.</p><a className="button button-primary" href={campaignHref}>{isAuthenticated ? "Créer une campagne" : "Démarrer avec Visiora"} <ArrowUpRight /></a></div>
           <div className="closing-mark"><BrandMark /></div>
         </div>
       </section>
