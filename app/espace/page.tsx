@@ -92,9 +92,7 @@ export default async function EspacePage() {
             <span>{totalCampaigns} campagne(s)</span>
           </div>
           {myCampaigns?.length ? myCampaigns.map(c => {
-            const follows = followsByCampaign.get(c.id) || 0;
             const target = Number(c.target_subscribers) || 0;
-            const progress = target > 0 ? Math.min(100, Math.round((follows / target) * 100)) : 0;
             const payment = paymentByCampaign.get(c.id);
             return (
               <article className="admin-record" key={c.id}>
