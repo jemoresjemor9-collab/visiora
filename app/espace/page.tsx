@@ -55,10 +55,6 @@ export default async function EspacePage() {
       ])
     : [{ data: [] }, { data: [] }];
 
-  const followsByCampaign = new Map<string, number>();
-  for (const event of followEvents || []) {
-    followsByCampaign.set(event.campaign_id, (followsByCampaign.get(event.campaign_id) || 0) + 1);
-  }
   const paymentByCampaign = new Map((payments || []).map(p => [p.campaign_id, p]));
 
   const totalCampaigns = myCampaigns?.length || 0;
