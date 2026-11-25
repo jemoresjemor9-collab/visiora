@@ -109,11 +109,8 @@ export default async function EspacePage() {
                   </div>
                   <a className="admin-profile-link" href={c.platform_url} target="_blank" rel="noreferrer">Voir le profil concerné ↗</a>
                   <div className="admin-record-meta">
-                    <strong>{follows.toLocaleString("fr-FR")} / {target.toLocaleString("fr-FR")} abonnements volontaires enregistrés</strong>
-                    <span>{progress}% de l’objectif</span>
                   </div>
                   <div style={{ height: 8, borderRadius: 20, background: "#26374e", overflow: "hidden", maxWidth: 520 }}>
-                    <div style={{ width: `${progress}%`, height: "100%", borderRadius: 20, background: "#399c75" }} />
                   </div>
                   <small>{payment ? paymentLabels[payment.status] || payment.status : "Aucun paiement associé"}</small>
                 </div>
