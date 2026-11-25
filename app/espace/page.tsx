@@ -14,7 +14,7 @@ export default async function EspacePage() {
   return (
     <main className="workspace-page">
       <header className="workspace-header">
-        <Link className="brand" href="/"><span className="brand-mark"><svg viewBox="0 0 42 42" fill="none"><path d="M8.5 9.5L19.6 31.8C20.2 33 21.8 33 22.4 31.8L33.5 9.5" stroke="currentColor" strokeWidth="6.2" strokeLinecap="round" strokeLinejoin="round"/><path d="M15.8 9.5L21 20" stroke="#8CC8FF" strokeWidth="2.4" strokeLinecap="round"/></svg></span><span>visiora<span className="brand-period">.</span></span></Link>
+        <Link className="brand" href="/"><span className="brand-mark"><svg viewBox="0 0 42 42" fill="none"><path d="M8.5 9.5L19.6 31.8C20.2 33 21.8 33 22.4 31.8L33.5 9.5" stroke="currentColor" strokeWidth="6.2" strokeLinecap="round" strokeLinejoin="round"/><path d="M15.8 9.5L21 20" stroke="#8CC8FF" strokeWidth="2.4" strokeLinecap="round"/></svg></span><span>Visiora<span className="brand-period">.</span></span></Link>
         <form action="/auth/signout" method="post"><button className="workspace-logout" type="submit">Déconnexion</button></form>
       </header>
       <section className="workspace-main">
