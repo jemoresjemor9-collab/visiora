@@ -41,6 +41,7 @@ export default async function AdminPage() {
         initialPayments={payments || []}
         initialThreads={threads || []}
         profiles={profiles || []}
+        followEvents={events || []}
       />
     </section>
   </main>;
