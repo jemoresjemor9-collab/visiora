@@ -92,7 +92,7 @@ export default function ConnexionPage() {
               <label>Mot de passe
                 <span className="password-field">
                   <input type={showPassword ? "text" : "password"} autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="8 caractères minimum" minLength={8} required disabled={mode !== "signup"} />
-                  <button className="password-visibility" type="button" onClick={() => setShowPassword(value => !value)} aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"} aria-pressed={showPassword} tabIndex={mode === "signup" ? 0 : -1}>
+                  <button className="password-visibility" type="button" onClick={() => setShowPassword(value => !value)} aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"} aria-pressed={showPassword} tabIndex={mode === "signup" ? 0 : -1} disabled={mode !== "signup"}>
                     {showPassword ? <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18M10.6 10.7a2 2 0 002.7 2.7M9.9 5.2A10.8 10.8 0 0112 5c5.2 0 8.7 4.5 9.5 6-.3.6-1.3 2-3.1 3.5M6.2 6.3C4.2 7.6 2.9 9.5 2.5 11c.8 1.5 4.3 6 9.5 6 1 0 2-.2 2.9-.5" /></svg> : <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7z" /><circle cx="12" cy="12" r="3" /></svg>}
                   </button>
                 </span>
@@ -114,7 +114,7 @@ export default function ConnexionPage() {
               <label>Mot de passe
                 <span className="password-field">
                   <input type={showPassword ? "text" : "password"} autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Votre mot de passe" required disabled={mode !== "login"} />
-                  <button className="password-visibility" type="button" onClick={() => setShowPassword(value => !value)} aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"} aria-pressed={showPassword} tabIndex={mode === "login" ? 0 : -1}>
+                  <button className="password-visibility" type="button" onClick={() => setShowPassword(value => !value)} aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"} aria-pressed={showPassword} tabIndex={mode === "login" ? 0 : -1} disabled={mode !== "login"}>
                     {showPassword ? <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18M10.6 10.7a2 2 0 002.7 2.7M9.9 5.2A10.8 10.8 0 0112 5c5.2 0 8.7 4.5 9.5 6-.3.6-1.3 2-3.1 3.5M6.2 6.3C4.2 7.6 2.9 9.5 2.5 11c.8 1.5 4.3 6 9.5 6 1 0 2-.2 2.9-.5" /></svg> : <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7z" /><circle cx="12" cy="12" r="3" /></svg>}
                   </button>
                 </span>
