@@ -9,11 +9,12 @@ type Payment = {id:string;user_id:string;campaign_id:string|null;amount:number|s
 type Thread = {id:string;subject:string;status:string;last_message_at:string;user_id:string;campaign_id:string|null};
 type Profile = {id:string;display_name:string|null;avatar_url:string|null;phone:string|null;country_code:string|null};
 type FollowEvent = {campaign_id:string;event_type:string};
+type Metrics = {total_users:number;total_campaigns:number;completed_campaigns:number;in_progress_campaigns:number;new_campaigns:number;total_payments:number;pending_payments:number;paid_amount_xof:number|string};
 
 const statusLabels:Record<string,string>={draft:"Brouillon",pending_payment:"Paiement attendu",pending_review:"À valider",active:"En cours",paused:"En pause",completed:"Terminée",cancelled:"Annulée",rejected:"Refusée",pending:"En attente",succeeded:"Confirmé",failed:"Échoué",refunded:"Remboursé",open:"Ouverte",waiting_admin:"À traiter",waiting_user:"En attente du client",closed:"Fermée"};
 const money=(value:number|string,currency="XOF")=>`${Number(value).toLocaleString("fr-FR")} ${currency==="XOF"?"FCFA":currency}`;
 
-export default function AdminDashboard({initialCampaigns,initialPayments,initialThreads,profiles,followEvents}:{initialCampaigns:Campaign[];initialPayments:Payment[];initialThreads:Thread[];profiles:Profile[];followEvents:FollowEvent[]}) {
+export default function AdminDashboard({initialCampaigns,initialPayments,initialThreads,profiles,followEvents,metrics}:{initialCampaigns:Campaign[];initialPayments:Payment[];initialThreads:Thread[];profiles:Profile[];followEvents:FollowEvent[];metrics:Metrics}) {
   const supabase=createClient();
   const [campaigns,setCampaigns]=useState(initialCampaigns);
   const [payments,setPayments]=useState(initialPayments);
@@ -53,11 +54,16 @@ export default function AdminDashboard({initialCampaigns,initialPayments,initial
 
   return <div className="admin-dashboard">
     <div className="admin-stats">
-      <div><strong>{campaigns.length}</strong><span>Campagnes enregistrées</span></div>
-      <div><strong>{pendingPayments.length}</strong><span>Paiements à vérifier</span></div>
-      <div><strong>{waitingThreads.length}</strong><span>Messages à traiter</span></div>
-      <div><strong>{campaigns.filter(c=>c.status==="active").length}</strong><span>Campagnes actives</span></div>
+      <div><strong>{Number(metrics.total_users).toLocaleString("fr-FR")}</strong><span>Utilisateurs inscrits</span></div>
+      <div><strong>{Number(metrics.total_campaigns).toLocaleString("fr-FR")}</strong><span>Total des campagnes</span></div>
+      <div><strong>{Number(metrics.new_campaigns).toLocaleString("fr-FR")}</strong><span>Nouvelles campagnes · 7 jours</span></div>
+      <div><strong>{Number(metrics.in_progress_campaigns).toLocaleString("fr-FR")}</strong><span>Campagnes en attente ou en cours</span></div>
+      <div><strong>{Number(metrics.completed_campaigns).toLocaleString("fr-FR")}</strong><span>Campagnes terminées</span></div>
+      <div><strong>{Number(metrics.total_payments).toLocaleString("fr-FR")}</strong><span>Nombre de paiements</span></div>
+      <div><strong>{Number(metrics.pending_payments).toLocaleString("fr-FR")}</strong><span>Paiements à vérifier</span></div>
+      <div><strong>{money(metrics.paid_amount_xof,"XOF")}</strong><span>Total réellement confirmé</span></div>
     </div>
+    <p className="admin-terms">Le chiffre d’affaires additionne uniquement les paiements dont le statut est « confirmé ». Les paiements en attente ou refusés ne sont pas comptabilisés.</p>
     {notice&&<p className="admin-notice">{notice}</p>}{error&&<p className="auth-error">{error}</p>}
     <section className="admin-section">
       <div className="admin-heading"><div><h2>Campagnes</h2><p>Consultez les demandes et pilotez leur statut.</p></div><span>{visibleCampaigns.length} résultat(s)</span></div>
@@ -72,7 +78,7 @@ export default function AdminDashboard({initialCampaigns,initialPayments,initial
         return <article className="admin-record" key={c.id}>
           <div className="admin-record-main">
             <div className="admin-record-title"><strong>{c.title}</strong><span className={`admin-status status-${c.status}`}>{statusLabels[c.status]||c.status}</span></div>
-            <div className="admin-record-meta"><span>{c.platform.toUpperCase()}</span><span>{c.target_subscribers.toLocaleString("fr-FR")} abonnés visés</span><span>{(deliveredByCampaign.get(c.id)||0).toLocaleString("fr-FR")} abonnements volontaires enregistrés</span><span>{money(c.budget_amount,c.currency)}</span><span>{new Date(c.created_at).toLocaleDateString("fr-FR")}</span></div>
+            <div className="admin-record-meta"><span>{c.platform.toUpperCase()}</span><span>{c.target_subscribers.toLocaleString("fr-FR")} abonnés visés</span><span>{(deliveredByCampaign.get(c.id)||0).toLocaleString("fr-FR")} / {Number(c.target_subscribers).toLocaleString("fr-FR")} abonnements volontaires enregistrés</span><span>{money(c.budget_amount,c.currency)}</span><span>{new Date(c.created_at).toLocaleDateString("fr-FR")}</span></div>
             <a className="admin-profile-link" href={c.platform_url} target="_blank" rel="noreferrer">{c.platform_url}</a>
             <small>Client : {profile?.display_name||"Nom non renseigné"} · {profile?.phone||"Téléphone non renseigné"} · ID {c.user_id.slice(0,8)}</small>
             {payment&&<small>Paiement : {statusLabels[payment.status]||payment.status}{payment.provider? ` · ${payment.provider}`:""}{payment.proof_url?<> · <a href={payment.proof_url} target="_blank" rel="noreferrer">Voir le justificatif</a></>:""}</small>}
