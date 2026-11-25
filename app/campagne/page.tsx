@@ -43,7 +43,7 @@ export default function CampaignRequestPage() {
   const [error, setError] = useState("");
   const [done, setDone] = useState("");
   const requestedSubscribers = Number(target);
-  const calculatedAmount = Number.isInteger(requestedSubscribers) && requestedSubscribers > 0
+  const calculatedAmount = Number.isInteger(requestedSubscribers) && requestedSubscribers >= 10 && requestedSubscribers <= 1000
     ? Math.ceil((requestedSubscribers * 2500) / 1000)
     : 0;
 
@@ -56,8 +56,8 @@ export default function CampaignRequestPage() {
       return;
     }
     const subscriberTarget = Number(target);
-    if (!Number.isInteger(subscriberTarget) || subscriberTarget < 1) {
-      setError("Indiquez un objectif d’au moins 1 abonné.");
+    if (!Number.isInteger(subscriberTarget) || subscriberTarget < 10 || subscriberTarget > 1000) {
+      setError("Indiquez un nombre compris entre 10 et 1 000 abonnés.");
       setBusy(false);
       return;
     }
@@ -106,8 +106,8 @@ export default function CampaignRequestPage() {
             <input value="Développer des abonnés authentiques" readOnly />
           </label>
           <label>Nombre d’abonnés souhaités
-            <input type="number" min="1" step="1" required value={target} onChange={e=>setTarget(e.target.value)} inputMode="numeric" />
-            <small className="field-hint">Tarif : 2 500 FCFA pour 1 000 abonnés indicatifs. Le montant est calculé automatiquement et toute fraction de franc est arrondie au franc supérieur.</small>
+            <input type="number" min="10" max="1000" step="1" required value={target} onChange={e=>setTarget(e.target.value)} inputMode="numeric" />
+            <small className="field-hint">Choisissez entre 10 et 1 000 abonnés. Tarif : 2 500 FCFA pour 1 000 abonnés indicatifs. Le montant est calculé automatiquement et toute fraction de franc est arrondie au franc supérieur.</small>
           </label>
           <label>Montant à payer
             <input type="text" readOnly value={calculatedAmount > 0 ? `${calculatedAmount.toLocaleString("fr-FR")} FCFA` : "Saisissez un nombre d’abonnés valide"} aria-live="polite" />
