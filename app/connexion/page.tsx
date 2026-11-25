@@ -98,7 +98,7 @@ export default function ConnexionPage() {
                 </span>
               </label>
               {mode === "signup" && error && <p className="auth-error" role="alert">{error}</p>}
-              {mode === "signup" && message && <p className="auth-success" role="status">{message}</p>}
+              {mode === "signup" && message && <div className="auth-success" role="status"><p>{message}</p><Link href="/connexion?mode=login">J’ai confirmé mon adresse · Se connecter →</Link></div>}
               <button className="button button-primary auth-submit" type="submit" disabled={busy || mode !== "signup"}>{busy ? "Patientez…" : "Créer mon compte"} <span>↗</span></button>
             </form>
             <p className="auth-switch">Vous avez déjà un compte ? <button type="button" onClick={() => switchMode("login")}>Se connecter</button></p>
